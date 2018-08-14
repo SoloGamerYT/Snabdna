@@ -272,7 +272,7 @@ client.on('message', message => {
 
 
 client.on('voiceStateUpdate', (codes, ReBeL) => {
-  if(ReBeL.voiceChannelID !== "474679922749734940") return console.log("أيرور . ");
+  if(ReBeL.voiceChannelID !== "479011493266849812") return console.log("أيرور . ");
   ReBeL.guild.createChannel(ReBeL.user.username , 'voice').then((rebeeel) =>{
       rebeeel.setParent("474679851576590366");
   ReBeL.guild.members.get(ReBeL.id).setVoiceChannel(rebeeel.id).then((codess) =>{
