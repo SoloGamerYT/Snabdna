@@ -293,19 +293,19 @@ client.on('voiceStateUpdate', (codes, ReBeL) => {
 
 
 
-            client.on('message', message => {
-              if(!message.channel.guild) return;
-  let args = message.content.split(' ').slice(1).join(' ');
-  if (message.content.startsWith('$$bcall')){
-   if (message.author.id !== '301370225062838272') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
-   if(!message.author.id === '301370225062838272') return;
-  message.channel.sendMessage('جار ارسال الرسالة |✅')
-  client.users.forEach(m =>{
-  m.sendMessage(args)
-  })
-  }
-  });           
-           
+   client.on("message", message => {
+
+            if (message.content.startsWith(prefix + "$$bc")) {
+                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+  let args = message.content.split(" ").slice(1);
+  var argresult = args.join(' '); 
+  message.guild.members.filter(m => m.presence.status !== 'all').forEach(m => {
+ m.send(`${argresult}\n ${m}`);
+})
+ message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'all').size}\` : عدد الاعضاء المستلمين`); 
+ message.delete(); 
+};     
+});  
 
 
 
@@ -852,29 +852,6 @@ console.log('[id] Send By: ' + message.author.username)
 });
 
 
-
-client.on('message', message => {
-    if (message.author.id === client.user.id) return;
-    if (message.guild) {
-   let embed = new Discord.RichEmbed()
-    let args = message.content.split(' ').slice(1).join(' ');
-if(message.content.split(' ')[0] == prefix + 'bc1') {
-    if (!args[1]) {
-return;
-}
-        message.guild.members.forEach(m => {
-   if(!message.member.hasPermission('ADMINISTRATOR')) return;
-            var bc = new Discord.RichEmbed()
-            .addField(' » الرسالة : ', args)
-            .setColor('#ff0000')
-            // m.send(`[${m}]`);
-            m.send(`${m}`,{embed: bc});
-        });
-    }
-    } else {
-        return;
-    }
-});
 
 
 
