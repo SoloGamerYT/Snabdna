@@ -977,7 +977,7 @@ console.log('[id] Send By: ' + message.author.username)
 client.on('ready', function(){
     client.user.setStatus("dnd");
     var ms = 10000 ;
-    var setGame = [`${PREFIX}help`];
+    var setGame = [`$$help`];
     var i = -1;
     var j = 0;
     setInterval(function (){
