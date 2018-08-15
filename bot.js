@@ -752,7 +752,7 @@ console.log('[id] Send By: ' + message.author.username)
 });
 
 
- client.on("roleCreate", rc => {
+client.on("roleCreate", rc => {
   const channel = rc.guild.channels.find("name", "log") //تقدر تغير اسم الشات
   if(channel) {
   var embed = new Discord.RichEmbed()
