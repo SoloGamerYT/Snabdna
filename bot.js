@@ -884,7 +884,6 @@ const queue = new Map();
 const PREFIX = '$$';
 
 
-});
 
 client.on('disconnect', () => console.log('I just disconnected, making sure you know, I will reconnect now...'));
 
