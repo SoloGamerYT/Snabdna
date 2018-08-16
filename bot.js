@@ -1329,6 +1329,8 @@ client.on('message', message => {
   var argresult = args.join(' ');
   if (message.author.id !== "439187325503930369") return;
 
+}
+});
 
 
 
