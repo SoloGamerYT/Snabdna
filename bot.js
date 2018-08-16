@@ -873,7 +873,6 @@ client.on('messageDelete', message => {
 
 
 
-const Discord = require('discord.js');
 
 const Util = require('discord.js');
 
