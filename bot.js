@@ -900,7 +900,7 @@ client.on('message', async msg =>{
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
 
-    if(command === `$$ping`) {
+    if(command === `ping`) {
     let embed = new Discord.RichEmbed()
     .setColor(3447003)
     .setTitle("Pong!!")
@@ -922,7 +922,7 @@ client.on('message', async msg =>{
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
 
-    if(command === `$$avatar`){
+    if(command === `avatar`){
 	if(msg.channel.type === 'dm') return msg.channel.send("Nope Nope!! u can't use avatar command in DMs (:")
         let mentions = msg.mentions.members.first()
         if(!mentions) {
@@ -966,7 +966,7 @@ client.on('message', async msg => {
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
 
-	if (command === `$$play`) {
+	if (command === `play`) {
 		const voiceChannel = msg.member.voiceChannel;
         
         if (!voiceChannel) return msg.channel.send("I can't find you in any voice channel!");
@@ -1046,7 +1046,7 @@ client.on('message', async msg => {
             
         }
         
-	} else if (command === `$$skip`) {
+	} else if (command === `skip`) {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
         if (!serverQueue) return msg.channel.send("There is no Queue to skip!!");
@@ -1054,7 +1054,7 @@ client.on('message', async msg => {
 		serverQueue.connection.dispatcher.end('Ok, skipped!');
         return undefined;
         
-	} else if (command === `$$stop`) {
+	} else if (command === `stop`) {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
         if (!serverQueue) return msg.channel.send("There is no Queue to stop!!");
@@ -1063,7 +1063,7 @@ client.on('message', async msg => {
 		serverQueue.connection.dispatcher.end('Ok, stopped & disconnected from your Voice channel');
         return undefined;
         
-	} else if (command === `$$vol`) {
+	} else if (command === `vol`) {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
 		if (!serverQueue) return msg.channel.send('You only can use this command while music is playing!');
@@ -1074,14 +1074,14 @@ client.on('message', async msg => {
         
         return msg.channel.send(`Volume Now is **${args[1]}**`);
 
-	} else if (command === `$$np`) {
+	} else if (command === `np`) {
 
 		if (!serverQueue) return msg.channel.send('There is no Queue!');
 		const embedNP = new Discord.RichEmbed()
 	    .setDescription(`Now playing **${serverQueue.songs[0].title}**`)
         return msg.channel.sendEmbed(embedNP);
         
-	} else if (command === `$$queue`) {
+	} else if (command === `queue`) {
 		
 		if (!serverQueue) return msg.channel.send('There is no Queue!!');
 		let index = 0;
@@ -1093,14 +1093,14 @@ client.on('message', async msg => {
 **Now playing :** **${serverQueue.songs[0].title}**`)
         .setColor("#f7abab")
 		return msg.channel.sendEmbed(embedqu);
-	} else if (command === `$$pause`) {
+	} else if (command === `pause`) {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
 			return msg.channel.send('Ok, paused');
 		}
 		return msg.channel.send('There is no Queue to Pause!');
-	} else if (command === "$$resume") {
+	} else if (command === "resume") {
 
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
@@ -1180,7 +1180,7 @@ function play(guild, song) {
 
 
 client.on('message', message => {
-    if (message.content === '$$help') {
+    if (message.content === 'help') {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر الميوزك...**')
         .setDescription('**برفكس البوت ($$)**')
@@ -1198,7 +1198,7 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if (message.content === '$$general_commands') {
+    if (message.content === 'general_commands') {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر عامة...**')
         .addField('avatar', "افاتار الشخص المطلوب")
