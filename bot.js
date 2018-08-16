@@ -883,22 +883,6 @@ const youtube = new YouTube(GOOGLE_API_KEY);
 const queue = new Map();
 const PREFIX = '$$';
 
-client.on('ready', function(){
-    client.user.setStatus("dnd");
-    var ms = 10000 ;
-    var setGame = [`${PREFIX}help`];
-    var i = -1;
-    var j = 0;
-    setInterval(function (){
-        if( i == -1 ){
-            j = 1;
-        }
-        if( i == (setGame.length)-1 ){
-            j = -1;
-        }
-        i = i+j;
-        client.user.setGame(setGame[i],`https://www.twitch.tv/skwadraa`);
-    }, ms);10000
 
 });
 
@@ -1329,10 +1313,22 @@ client.on('message', message => {
   var argresult = args.join(' ');
   if (message.author.id !== "439187325503930369") return;
 
+if (message.content.startsWith(PREFIX + 'setstream')) {
+  client.user.setGame(argresult, "https://www.twitch.tv/darkknite55");
+	 console.log('test' + argresult);
+    message.channel.sendMessage(`Streaming: **${argresult}`)
+}
+
+if (message.content.startsWith(PREFIX + 'setname')) {
+  client.user.setUsername(argresult).then
+	  message.channel.sendMessage(`Username Changed To **${argresult}**`)
+  return message.reply("You Can change the username 2 times per hour");
+}
 if (message.content.startsWith(PREFIX + 'setavatar')) {
   client.user.setAvatar(argresult);
    message.channel.sendMessage(`Avatar Changed Successfully To **${argresult}**`);
 }
 });
+
 
 client.login(process.env.BOT_TOKEN);
