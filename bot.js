@@ -888,7 +888,6 @@ const queue = new Map();
 const ytdl = require('ytdl-core');
 
 
-const gif = require("gif-search");
 
 /////////////////////////
 ////////////////////////
