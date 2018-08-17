@@ -1150,8 +1150,7 @@ client.on('message', async msg => { // eslint disable line
             },
             fields: [{
                 name: "Bot's commands:",
-client.on('message', message => {
-            if (message.content.startsWith(prefix + "$$help")) {
+            if (message.content.startsWith("$$help")) {
      let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
 .addField('     **$$play** ' ,' **علشان تشغل اغاني** ')
