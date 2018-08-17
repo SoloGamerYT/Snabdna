@@ -1150,17 +1150,23 @@ client.on('message', async msg => { // eslint disable line
             },
             fields: [{
                 name: "Bot's commands:",
-                value: `**${PREFIX}help** - This message!\n\
-**${PREFIX}play** - Play a song from YouTube.\n\
-**${PREFIX}skip** - Skip a song.\n\
-**${PREFIX}stop** - Stops the music.\n\
-**${PREFIX}volume** - Change the volume of the bot.\n\
-**${PREFIX}np** - The song that now playing.\n\
-**${PREFIX}queue** - See the queue of songs.\n\
-**${PREFIX}pause** - Pause the music.\n\
-**${PREFIX}resume** - Resume the music.`
-              }
-            ],
+client.on('message', message => {
+            if (message.content.startsWith(prefix + "$$help")) {
+     let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField('     **$$play** ' ,' **علشان تشغل اغاني** ')
+.addField('     **$$queue**  ' ,' **يظهرلك الاغاني الي قاعد تشتغل** ')
+.addField('     **$$skip** ' , '**تخطي الاغنية**') 
+.addField('     **$$stop** ' , '**ايقاف تشغيل الاغنية**') 
+.addField('     **$$volume** ' ,' **لرفع صوت من 50-150 **')
+.addField('     **$$np** ' , '**يظهرلك الاغنية الي قاعد تشتغل دحين**')
+.addField('     **$$pause ** ' ,' ** ل ايقاف ال اغنية  ** ')
+.addField('     **$$resume ** ' ,' ** توقف الاغنية مؤقت ** ')
+.setColor('#7d2dbe')
+  message.channel.sendEmbed(embed);
+    }
+});
+           
             timestamp: new Date(),
             footer: {
               icon_url: client.user.avatarURL,
