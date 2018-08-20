@@ -1331,6 +1331,7 @@ if (message.content.startsWith(PREFIX + 'setavatar')) {
 });
 
 });
+});
 Rocket.on('message',function(message) {
     let toKick = message.mentions.users.first();
     let toReason = message.content.split(" ").slice(2).join(" ");
@@ -1353,6 +1354,7 @@ Rocket.on('message',function(message) {
        )
        }
 });
+
 Rocket.on("message", function(message) {
     let toBan = message.mentions.users.first();
     let toReason = message.content.split(" ").slice(2).join(" ");
@@ -1375,5 +1377,9 @@ Rocket.on("message", function(message) {
        .addField("**# - من قبل:**",message.author,true)
        if(message.member.hasPermission("BAN_MEMBERS")) return (
            toBan.sendMessage({embed: toEmbed}).then(() => message.guild.member(toBan).ban({reason: toReason})).then(() => message.channel.send(`**# Done! I banned: ${toBan}**`))
-   
+       );
+
+   }
+});
+
 client.login(process.env.BOT_TOKEN);
