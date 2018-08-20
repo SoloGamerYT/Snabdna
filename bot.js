@@ -1379,7 +1379,5 @@ Rocket.on("message", function(message) {
            toBan.sendMessage({embed: toEmbed}).then(() => message.guild.member(toBan).ban({reason: toReason})).then(() => message.channel.send(`**# Done! I banned: ${toBan}**`))
        );
 
-   }
-});
 
 client.login(process.env.BOT_TOKEN);
