@@ -1330,8 +1330,7 @@ if (message.content.startsWith(PREFIX + 'setavatar')) {
 }
 });
 
-});
-});
+
 Rocket.on('message',function(message) {
     let toKick = message.mentions.users.first();
     let toReason = message.content.split(" ").slice(2).join(" ");
