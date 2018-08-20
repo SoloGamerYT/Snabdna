@@ -1351,10 +1351,8 @@ Rocket.on('message',function(message) {
        .addField("**# - من قبل:**",message.author,true)
        if(message.member.hasPermission("KICK_MEMBERS")) return (
            toKick.sendMessage({embed: toEmbed}).then(() => message.guild.member(toKick).kick()).then(() => message.channel.send(`**# Done! I kicked: ${toKick}**`))
-       )
-       }
-});
-
+       );
+ 
 Rocket.on("message", function(message) {
     let toBan = message.mentions.users.first();
     let toReason = message.content.split(" ").slice(2).join(" ");
