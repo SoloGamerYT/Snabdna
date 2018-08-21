@@ -121,6 +121,130 @@ channel.guild.owner.send(`<@!${channelremover.id}>
   },Otime)
   });
 
+
+ client.on("roleCreate", rc => {
+  const channel = rc.guild.channels.find("name", "log") //تقدر تغير اسم الشات
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(rc.guild.name)
+  .setDescription(`***Created Role Name : *** **${rc.name}** `)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+  
+  client.on("roleDelete",  rd => {
+  const channel = rd.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(rd.guild.name)
+  .setDescription(`***Deleted Role Name : *** **${rd.name}** `)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+
+client.on("channelCreate",  cc => {
+  const channel = cc.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(cc.guild.name)
+  .setDescription(`***Channel Created Name : *** **${cc.name}** ⬅️`)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+
+   client.on("deleteChannel",  dc => {
+  const channel = dc.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(dc.guild.name)
+  .setDescription(`***Channel Deleted Name : *** **${dc.name}** ⬅️`)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+  
+  
+  
+  client.on('messageUpdate', (message, newMessage) => {
+    if (message.content === newMessage.content) return;
+    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+    const channel = message.guild.channels.find('name', 'log');
+    if (!channel) return;
+
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+       .setColor('SILVER')
+       .setDescription(`✏ **تعديل رساله
+ارسلها <@${message.author.id}>                                                                                                                         تم تعديلها في شات** <#${message.channel.id}>\n\nقبل التعديل:\n \`${message.cleanContent}\`\n\nبعد التعديل:\n \`${newMessage.cleanContent}\``)
+       .setTimestamp();
+     channel.send({embed:embed});
+
+
+});
+
+client.on('guildMemberAdd', member => {
+    if (!member || !member.id || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'log');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    const fromNow = moment(member.user.createdTimestamp).fromNow();
+    const isNew = (new Date() - member.user.createdTimestamp) < 900000 ? '🆕' : '';
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('GREEN')
+       .setDescription(`📥 <@${member.user.id}> **Joined To The Server**\n\n`)
+       .setTimestamp();
+     channel.send({embed:embed});
+});
+
+client.on('guildMemberRemove', member => {
+    if (!member || !member.id || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'log');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    const fromNow = moment(member.joinedTimestamp).fromNow();
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('RED')
+       .setDescription(`📤 <@${member.user.id}> **Leave From Server**\n\n`)
+       .setTimestamp();
+     channel.send({embed:embed});
+});
+
+client.on('messageDelete', message => {
+    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+    const channel = message.guild.channels.find('name', 'log');
+    if (!channel) return;
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+       .setColor('BLACK')
+       .setDescription(`🗑️ **حذف رساله**
+**ارسلها <@${message.author.id}>                                                                                                                        تم حذفها في شات** <#${message.channel.id}>\n\n \`${message.cleanContent}\``)
+       .setTimestamp();
+     channel.send({embed:embed});
+
+});
+
+
+
+
+
 client.on('message', msg => {
 	var prefix = "$$";
   if (msg.author.bot) return;
@@ -305,7 +429,7 @@ client.on('guildCreate', guild => {
      .setTitle('Click Here To Add Bot .!')
      .setURL('https://discordapp.com/oauth2/authorize?client_id=400489866573512705&permissions=8&scope=bot')
   .setDescription(`**
-  New Server Add Speed Bot ✅
+  New Server Add SoloGamer Bot ✅
 اسم السيرفر: ${guild.name}
 صاحب السيرفر: ${guild.owner}**`);
 client.channels.get("467833183254347797").sendEmbed(embed)
@@ -317,7 +441,7 @@ client.on('guildDelete', guild => {
      .setTitle('Click Here To Add Bot .!')
      .setURL('https://discordapp.com/oauth2/authorize?client_id=400489866573512705&permissions=8&scope=bot')
   .setDescription(`**
-  Server Kicked Speed Bot :cry:
+  Server Kicked SoloGamer Bot :cry:
 اسم السيرفر: ${guild.name}
 صاحب السيرفر: ${guild.owner}**`);
 client.channels.get("467833183254347797").sendEmbed(embed)
@@ -328,8 +452,8 @@ client.on('message', message => {
             if(!message.channel.guild) return;
 let args = message.content.split(' ').slice(1).join(' ');
 if (message.content.startsWith('>bcall')){
- if (message.author.id !== '349616310734553088') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
- if(!message.author.id === '349616310734553088') return;
+ if (message.author.id !== '465175900388982784') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
+ if(!message.author.id === '465175900388982784') return;
 message.channel.sendMessage('جار ارسال الرسالة |:white_check_mark:')
 client.users.forEach(m =>{
 m.sendMessage(args)
@@ -384,7 +508,7 @@ client.on('message', async msg => {
 			        .setDescription(`**الرجآء من حضرتك إختيآر رقم المقطع** :
 ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 
-					.setFooter("Speed Bot")
+					.setFooter("SoloGamer Bot")
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
 					
 					try {
@@ -650,7 +774,7 @@ client.on('message', message => {
 var embed = new Discord.RichEmbed()
 .setColor('RANDOM')
  .setThumbnail(message.author.avatarURL) 
-.addField('SoloGamer Bit' ,
+.addField('SoloGamer Bot' ,
 `${Za7f[Math.floor(Math.random() * Za7f.length)]}`)
 message.channel.sendEmbed(embed);
 console.log('[38ab] Send By: ' + message.author.username)
@@ -882,7 +1006,7 @@ client.on('message', message => {
             .setAuthor(client.user.username,client.user.avatarURL)
             .setThumbnail(client.user.avatarURL)
             .setColor('RANDOM')
-            .setTitle('``INFO Speed Bot`` ')
+            .setTitle('``INFO SoloGamer Bot`` ')
             .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
             .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
             .addField('``servers``', [client.guilds.size], true)
@@ -909,23 +1033,6 @@ client.on("message", message => {
     message.channel.send(image)
         }
     });
-client.on("guildMemberAdd", member => {
-let welcomer = member.guild.channels.find("name","welcome");
-      if(!welcomer) return;
-      if(welcomer) {
-         moment.locale('ar-ly');
-         var h = member.user;
-        let norelden = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(h.avatarURL)
-        .setAuthor(h.username,h.avatarURL)
-        .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)
-         .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
-     welcomer.send({embed:norelden});          
-               
- 
-      }
-      });
 
 
 client.on('message', message => {
@@ -1114,7 +1221,7 @@ function getValue(key, array) {
     if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
   if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
     let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-    let copy = "Speed Bot";
+    let copy = "SoloGamer Bot";
     let request = `Requested By ${message.author.username}`;
     if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
     msg.react('✅')
@@ -1502,25 +1609,31 @@ msg.channel.send(embed).then(() => {
 }
 });
 
-
-client.on('ready', function(){	
-    var ms = 40000 ;	
-    var setGame = ['my commands'];	
-    var i = -1;	
-    var j = 0;	
-    setInterval(function (){	
-        if( i == -1 ){	
-j = 1;	
-       }	
-        if( i == (setGame.length)-1 ){	
-            j = -1;	
-      }	
-       i = i+j;	
-        client.user.setGame(setGame[i],`http://www.youtube.com/gg`);	
-}, ms);	
-	
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+client.user.setGame(`Hi Im SoloGamer Bot Enjoy`,"http://twitch.tv/S-F")
+  console.log('')
+  console.log('')
+  console.log('╔[═════════════════════════════════════════════════════════════════]╗')
+  console.log(`[Start] ${new Date()}`);
+  console.log('╚[═════════════════════════════════════════════════════════════════]╝')
+  console.log('')
+  console.log('╔[════════════════════════════════════]╗');
+  console.log(`Logged in as * [ " ${client.user.username} " ]`);
+  console.log('')
+  console.log('Informations :')
+  console.log('')
+  console.log(`servers! [ " ${client.guilds.size} " ]`);
+  console.log(`Users! [ " ${client.users.size} " ]`);
+  console.log(`channels! [ " ${client.channels.size} " ]`);
+  console.log('╚[════════════════════════════════════]╝')
+  console.log('')
+  console.log('╔[════════════]╗')
+  console.log(' Bot Is Online')
+  console.log('╚[════════════]╝')
+  console.log('')
+  console.log('')
 });
-
 
 client.on('message', message => {
   var prefix ="$$"; 
@@ -1638,9 +1751,6 @@ client.on('message', message =>{
     }
 });
  
-client.on('ready', () => {
-	console.log('I am ready!'); 
-  });
 
 client.on('message', message => {
 var prefix = "$$";
@@ -2260,7 +2370,7 @@ client.on('message', message => {
     .setColor("#707070")
     .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true) 
     .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)               
-    .setFooter(`Speed Bot`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
+    .setFooter(`SoloGamer Bot`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
     .setThumbnail(heg.avatarURL);
     message.channel.send(id)
 }       });
@@ -2434,8 +2544,119 @@ client.on("message", (message) => {
 
 
 
+const temp = {};
+client.on('message', async message => {
+ if(message.channel.type === "dm") return;
+  if(message.author.bot) return;
+   if(!temp[message.guild.id]) temp[message.guild.id] = {
+    time: "3000",
+     category : 'click here',
+      channel : 'click here'
+       }
+        if(message.content.startsWith('$$temp on')){
+         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+          var ggg= message.guild.createChannel('click here', 'category').then(cg => {
+           var ccc =message.guild.createChannel('click here', 'voice').then(ch => {
+            ch.setParent(cg)
+             message.channel.send('**Done ,**')
+              client.on('message' , message => {
+               if(message.content === '$$temp off') {
+                if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+                 cg.delete()
+                  ch.delete()
+                   message.channel.send('**Done ,**')
+                    }
+                     });
+                      const time = temp[message.guild.id].time
+                       client.on('message' , message => {
+                        if (message.content.startsWith(prefix + "temptime")) {
+                         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
+                          let newTime= message.content.split(' ').slice(1).join(" ")
+                          if(!newTime) return message.reply(`**${prefix}temptime <time>  \`1000 = 1s\`**`)
+	                 if(isNaN(newTime)) return message.reply(`** The Time Be Nambers :face_palm: **`);
+	                if(newTime < 1) return message.reply(`**The Time Be Up \`3000s\`**`)
+                       temp[message.guild.id].time = newTime
+                      message.channel.send(`**Temp Rooms Time Change To \`${newTime}\`**`);
+                     }
+                    });
+                   client.on('voiceStateUpdate', (old, neww) => {
+                  let newUserChannel = neww.voiceChannel
+                 let oldUserChannel = old.voiceChannel
+                temp[message.guild.id].category = cg.id
+               temp[message.guild.id].channel = ch.id
+              let channel = temp[message.guild.id].channel
+             let category = temp[message.guild.id].category
+            if(oldUserChannel === undefined && newUserChannel !== undefined && newUserChannel.id == channel) {
+           neww.guild.createChannel(neww.displayName , 'voice').then(c => {
+          c.setParent(category)
+         let scan = setTimeout(()=>{
+        if(!neww.voiceChannel) {
+       c.delete();
+      client.channels.get(channel).overwritePermissions(neww, {
+     CONNECT:true,
+    SPEAK:true
+   })
+  }
+ }, temp[neww.guild.id].time);
+  c.overwritePermissions(neww, {
+   CONNECT:true,
+    SPEAK:true,
+     MANAGE_CHANNEL:true,
+      MUTE_MEMBERS:true,
+       DEAFEN_MEMBERS:true,
+	MOVE_MEMBERS:true,
+	 VIEW_CHANNEL:true
+	  })
+	   neww.setVoiceChannel(c)
+            })
+             client.channels.get(channel).overwritePermissions(neww, {
+	      CONNECT:false,
+	       SPEAK:false
+		})
+               }
+              })
+             })
+           })
+          }
+      });
 
 
+client.on('guildMemberAdd', member => {
+    let channel = member.guild.channels.find('name', 'welcome');
+    let memberavatar = member.user.avatarURL
+      if (!channel) return;
+    let embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setThumbnail(memberavatar)
+        .addField('🎽 | name :  ',`${member}`)
+        .addField('📢 | نورت السيرفر يا قلبي' , `Welcome to the server, ${member}`)
+        .addField('🆔 | user :', "**[" + `${member.id}` + "]**" )
+                .addField('➡| انت العضو رقم',`${member.guild.memberCount}`)
+               
+                  .addField("Name:",`<@` + `${member.id}` + `>`, true)
+                     
+                                     .addField(' الـسيرفر', `${member.guild.name}`,true)
+                                       
+     .setFooter(`${member.guild.name}`)
+        .setTimestamp()
+   
+      channel.sendEmbed(embed);
+    });
+    
+    client.on('guildMemberRemove', member => {
+        var embed = new Discord.RichEmbed()
+        .setAuthor(member.user.username, member.user.avatarURL)
+        .setThumbnail(member.user.avatarURL)
+        .setTitle(`الله معاك ✋:skin-tone-1: 😔`)
+        .setDescription(`مع السلامه تشرفنا بك ✋:skin-tone-1: 😔 `)
+        .addField('👤   تبقي',`**[ ${member.guild.memberCount} ]**`,true)
+        .setColor('RED')
+        .setFooter(`==== نــتــمــنــآ لــكــم آســتــمـــتــآع ====`, 'https://cdn.discordapp.com/attachments/397818254439219217/399292026782351381/shy.png')
+    
+    var channel =member.guild.channels.find('name', 'welcome')
+    if (!channel) return;
+    channel.send({embed : embed});
+    })
 
 
 client.login(process.env.BOT_TOKEN);
