@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const db = require('quick.db');
-const client = new Discord.Client();     
-const googl = require('goo.gl');  
+const client = new Discord.Client();      
 const translate = require('google-translate-api');   
 const fs = require("fs"); 
 const getYoutubeID = require('get-youtube-id'); 
