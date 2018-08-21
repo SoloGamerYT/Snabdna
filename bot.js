@@ -2607,6 +2607,6 @@ deny: ['CONNECT']
     if(!channels[member.id]) channels[member.id] = {
         channel: channel.id,
         }
-member.user.send(`Hey **${member.displayName}** I've created a channel for you!
+
 
 client.login(process.env.BOT_TOKEN);
