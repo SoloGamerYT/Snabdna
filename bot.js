@@ -2584,7 +2584,7 @@ client.on('guildMemberAdd', member => {
     })
 
 
-lient.on('voiceStateUpdate',async function(oldmember, member) {
+client.on('voiceStateUpdate',async function(oldmember, member) {
 if(member.user.bot) return;
 if(member.voiceChannel === undefined && channels[member.id]) {
 console.log(member.guild.members.filter(m => m.voiceChannelID === channels[member.id].channel).size)
