@@ -2544,81 +2544,6 @@ client.on("message", (message) => {
 
 
 
-const temp = {};
-client.on('message', async message => {
- if(message.channel.type === "dm") return;
-  if(message.author.bot) return;
-   if(!temp[message.guild.id]) temp[message.guild.id] = {
-    time: "3000",
-     category : 'click here',
-      channel : 'click here'
-       }
-        if(message.content.startsWith('$$temp on')){
-         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
-          var ggg= message.guild.createChannel('click here', 'category').then(cg => {
-           var ccc =message.guild.createChannel('click here', 'voice').then(ch => {
-            ch.setParent(cg)
-             message.channel.send('**Done ,**')
-              client.on('message' , message => {
-               if(message.content === '$$temp off') {
-                if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
-                 cg.delete()
-                  ch.delete()
-                   message.channel.send('**Done ,**')
-                    }
-                     });
-                      const time = temp[message.guild.id].time
-                       client.on('message' , message => {
-                        if (message.content.startsWith(prefix + "temptime")) {
-                         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
-                          let newTime= message.content.split(' ').slice(1).join(" ")
-                          if(!newTime) return message.reply(`**${prefix}temptime <time>  \`1000 = 1s\`**`)
-	                 if(isNaN(newTime)) return message.reply(`** The Time Be Nambers :face_palm: **`);
-	                if(newTime < 1) return message.reply(`**The Time Be Up \`3000s\`**`)
-                       temp[message.guild.id].time = newTime
-                      message.channel.send(`**Temp Rooms Time Change To \`${newTime}\`**`);
-                     }
-                    });
-                   client.on('voiceStateUpdate', (old, neww) => {
-                  let newUserChannel = neww.voiceChannel
-                 let oldUserChannel = old.voiceChannel
-                temp[message.guild.id].category = cg.id
-               temp[message.guild.id].channel = ch.id
-              let channel = temp[message.guild.id].channel
-             let category = temp[message.guild.id].category
-            if(oldUserChannel === undefined && newUserChannel !== undefined && newUserChannel.id == channel) {
-           neww.guild.createChannel(neww.displayName , 'voice').then(c => {
-          c.setParent(category)
-         let scan = setTimeout(()=>{
-        if(!neww.voiceChannel) {
-       c.delete();
-      client.channels.get(channel).overwritePermissions(neww, {
-     CONNECT:true,
-    SPEAK:true
-   })
-  }
- }, temp[neww.guild.id].time);
-  c.overwritePermissions(neww, {
-   CONNECT:true,
-    SPEAK:true,
-     MANAGE_CHANNEL:true,
-      MUTE_MEMBERS:true,
-       DEAFEN_MEMBERS:true,
-	MOVE_MEMBERS:true,
-	 VIEW_CHANNEL:true
-	  })
-	   neww.setVoiceChannel(c)
-            })
-             client.channels.get(channel).overwritePermissions(neww, {
-	      CONNECT:false,
-	       SPEAK:false
-		})
-               }
-              })
-             })
-           })
-          }
-      });
 
 
 client.on('guildMemberAdd', member => {
@@ -2658,5 +2583,30 @@ client.on('guildMemberAdd', member => {
     channel.send({embed : embed});
     })
 
+
+lient.on('voiceStateUpdate',async function(oldmember, member) {
+if(member.user.bot) return;
+if(member.voiceChannel === undefined && channels[member.id]) {
+console.log(member.guild.members.filter(m => m.voiceChannelID === channels[member.id].channel).size)
+if(member.guild.members.filter(m => m.voiceChannelID === channels[member.id].channel).size < 1) {
+member.guild.channels.get(channels[member.id].channel).delete();
+channels[member.id].channel = undefined;
+}
+}
+if(oldmember.voiceChannel !== undefined || member.voiceChannel !== undefined) {
+if(member.voiceChannelID === '481569350445432834') {
+member.guild.createChannel(member.displayName, "voice", [{
+id: member.id,
+allow: ['CONNECT'],
+}, {
+id: member.guild.id,
+deny: ['CONNECT']
+}]).then((channel)=> {
+    const parent = member.guild.channels.get('481569350445432834').parentID
+    channel.setParent(parent);
+    if(!channels[member.id]) channels[member.id] = {
+        channel: channel.id,
+        }
+member.user.send(`Hey **${member.displayName}** I've created a channel for you!
 
 client.login(process.env.BOT_TOKEN);
