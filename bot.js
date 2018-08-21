@@ -2584,29 +2584,6 @@ client.on('guildMemberAdd', member => {
     })
 
 
-client.on('voiceStateUpdate',async function(oldmember, member) {
-if(member.user.bot) return;
-if(member.voiceChannel === undefined && channels[member.id]) {
-console.log(member.guild.members.filter(m => m.voiceChannelID === channels[member.id].channel).size)
-if(member.guild.members.filter(m => m.voiceChannelID === channels[member.id].channel).size < 1) {
-member.guild.channels.get(channels[member.id].channel).delete();
-channels[member.id].channel = undefined;
-}
-}
-if(oldmember.voiceChannel !== undefined || member.voiceChannel !== undefined) {
-if(member.voiceChannelID === '481569350445432834') {
-member.guild.createChannel(member.displayName, "voice", [{
-id: member.id,
-allow: ['CONNECT'],
-}, {
-id: member.guild.id,
-deny: ['CONNECT']
-}]).then((channel)=> {
-    const parent = member.guild.channels.get('481569350445432834').parentID
-    channel.setParent(parent);
-    if(!channels[member.id]) channels[member.id] = {
-        channel: channel.id,
-        }
 
 
 client.login(process.env.BOT_TOKEN);
