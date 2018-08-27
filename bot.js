@@ -3013,7 +3013,14 @@ message.channel.sendFile(canvas.toBuffer())
 });
 
 
+{"298732816995319809":{"info":"$info To Set The Info","rep":0,"reps":"NOT YET","lastDaily":"Not Collected","level":0,"points":19},"278114289393598464":{"info":"Let's Get Started ....!","rep":0,"reps":"NOT YET","lastDaily":"Not Collected","level":1,"points":57},"201632163991519233":{"info":"$info To Set The Info","rep":0,"reps":"NOT YET","lastDaily":"Not Collected","level":1,"points":73},"330708095787466753":{"info":"احب بوتي","rep":1,"reps":"NOT YET","lastDaily":"Not Collected","level":2,"points":221},"380044490704158730":{"info":"$info To Set The Info","rep":0,"reps":"NOT YET","lastDaily":"Not Collected","level":0,"points":17},"418064523157700609":{"info":"$info To Set The Info","rep":0,"reps":"07/23/2018","lastDaily":"Not Collected","level":1,"points":89},"330650964690206720":{"info":"$info To Set The Info","rep":0,"reps":"NOT YET","lastDaily":"Not Collected","level":0,"points":5}}
 
+
+
+
+{"298732816995319809":{"credits":100,"level":1},"278114289393598464":{"credits":99990999,"level":100000,"lastDaily":"5amy"},"201632163991519233":{"credits":500,"level":1,"lastDaily":"1pmy"},"330708095787466753":{"credits":300,"level":1,"lastDaily":"1pmy"},"380044490704158730":{"credits":100,"level":1},"418064523157700609":{"credits":100,"level":1},"330650964690206720":{"credits":100,"level":1}}
+
+{"298732816995319809":{"ai":true,"wallSrc":"./walls/p2.png","walls":{"1":{"src":"walls/p3.png","price":0}}},"278114289393598464":{"ai":true,"wallSrc":"walls/le3moree.jpg","walls":{"8":{"src":"walls/le3moree.jpg","price":9000}}},"201632163991519233":{"ai":false,"wallSrc":"./walls/p2.png","walls":{}},"330708095787466753":{"ai":false,"wallSrc":"./walls/p2.png","walls":{}},"380044490704158730":{"ai":false,"wallSrc":"./walls/p2.png","walls":{}},"418064523157700609":{"ai":true,"wallSrc":"walls/p3.png","walls":{"1":{"src":"walls/p3.png","price":0}}},"330650964690206720":{"ai":false,"wallSrc":"./walls/p2.png","walls":{}}}
 
 
 client.login(process.env.BOT_TOKEN);
