@@ -18,7 +18,7 @@ const queue = new Map();
 const zalgo = require('zalgolize');   
 const fetchVideoInfo = require('youtube-info');
 const YouTube = require('simple-youtube-api');
-const ytdl = require('ytdl-core');var shortNumber = require('short-number');
+const ytdl = require('ytdl-core');
 const userData = JSON.parse(fs.readFileSync('./userData.json', 'utf8'));
 let done = {};
 
