@@ -19,9 +19,7 @@ const zalgo = require('zalgolize');
 const fetchVideoInfo = require('youtube-info');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');var shortNumber = require('short-number');
- const userData = JSON.parse(fs.readFileSync('./userData.json', 'utf8'));
-var shortNumber = require('short-number');
-const rn = require('random-number');
+const userData = JSON.parse(fs.readFileSync('./userData.json', 'utf8'));
 let done = {};
 
 
