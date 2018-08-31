@@ -1128,11 +1128,7 @@ function getValue(key, array) {
     reaction2.on("collect", r => {
     message.channel.send(`**Broadcast Canceled.**`).then(m => m.delete(5000));
     msg.delete();
-    })
-    })
-    }
-    });
-
+  
  
  
 const item = type[Math.floor(Math.random() * type.length)];
