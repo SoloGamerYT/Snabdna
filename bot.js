@@ -1428,24 +1428,7 @@ const type = [
     }
 ];
  
-client.on('message', message => {
-if (!points[message.author.id]) points[message.author.id] = {
-    points: 0,
-  };
-  if(!message.guild) return;
-    let id = message.author.id,prefix="$$";
-    if ([id] && (new Date).getTime() - [id] < 15*1000) {
-        let r = (new Date).getTime() - [id];
-        r = 15*1000 - r;
-    message.channel.send(`**Sorry, Please Wait ${pretty(r, {verbose:true})}...**`).then(m => m.delete(5000));
-    return;
-    }
-    if ( message.content == prefix+'speed'){
-       
-        try{
-}catch(e){
- 
-}
+
  
     if(!message.channel.guild) return message.reply('**هذا الأمر للسيرفرات فقط**').then(m => m.delete(3000));
  
